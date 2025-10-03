@@ -1,13 +1,14 @@
 name: Docker Deployment
 on: workflow_dispatch
 jobs:
-  deploy:
-    name: Deploy Python App to Dev Vm
+  deploy: 
     runs-on: ubuntu-latest
     steps:
-      - name: Login to the dev server
-        run: |
-          ssh -i ${{github.workspace}}/serverlogin/dockermachine.pem -o StrictHostKeyChecking=no ubuntu@ec2-34-230-90-47.compute-1.amazonaws.com 'echo "Logged in successfully"'
-          cd /home/ubuntu
-          ls -lthr
-          docker --version
+        - name: Checkout repository
+          uses: actions/checkout@v3
+        - name: Login to the dev server
+          run: |
+            ssh -i $GITHUB_WORKSPACE/serverlogin/dockermachine.pem -o StrictHostKeyChecking=no ubuntu@ec2-34-230-90-47.compute-1.amazonaws.com 'echo "Logged in successfully"'
+            cd /home/ubuntu
+            ls -lthr
+            docker --version
