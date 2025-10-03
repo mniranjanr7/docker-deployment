@@ -8,6 +8,7 @@ jobs:
           uses: actions/checkout@v3
         - name: Login to the dev server
           run: |
+            chmod 400 $GITHUB_WORKSPACE/serverlogin/dockermachine.pem
             ssh -i $GITHUB_WORKSPACE/serverlogin/dockermachine.pem -o StrictHostKeyChecking=no ubuntu@ec2-34-230-90-47.compute-1.amazonaws.com 'echo "Logged in successfully"'
             cd /home/ubuntu
             ls -lthr
